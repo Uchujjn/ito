@@ -72,6 +72,9 @@
 <div class="info">
     <div>第<span id="round">1</span>ラウンド</div>
     <div>残りライフ: <span id="score">100</span></div>
+    <div>前問の予想: <span id="preAnswer">0</span></div>
+    <div>前問の正解: <span id="preNumver">0</span></div>
+    
 </div>
 
 <button id="resetGame" style="background:#dc3545;">リセット</button>
@@ -79,6 +82,8 @@
 <script>
 let topics = [];
 let currentNumber = 0;
+let preNumber = 0;
+let preAnswer = 0;
 let isNumberHidden = true;
 let round = 1;
 let score = 100;
@@ -125,8 +130,12 @@ document.getElementById("submitGuess").addEventListener("click", () => {
     score -= diff;
     if (score < 0) score = 0;
     round++;
+    preAnser = guessValue;
+    preNumber = currentNumber;
     document.getElementById("round").textContent = round;
     document.getElementById("score").textContent = score;
+    document.getElementById("preAnswer").textContent = preAnswer;
+    document.getElementById("preNumber").textContent = preNumber;
     document.getElementById("guess").value = "";
     setNewTopicAndNumber();
 });
@@ -135,8 +144,12 @@ document.getElementById("submitGuess").addEventListener("click", () => {
 document.getElementById("resetGame").addEventListener("click", () => {
     round = 1;
     score = 100;
+    preAnswer = 0;
+    preNumber = 0;
     document.getElementById("round").textContent = round;
     document.getElementById("score").textContent = score;
+    document.getElementById("preAnswer").textContent = preAnswer;
+    document.getElementById("preNumber").textContent = preNumber;
     setNewTopicAndNumber();
 });
 </script>
