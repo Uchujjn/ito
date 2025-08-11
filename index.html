@@ -73,7 +73,7 @@
     <div>第<span id="round">1</span>ラウンド</div>
     <div>残りライフ: <span id="score">100</span></div>
     <div>前問の予想: <span id="preAnswer">0</span></div>
-    <div>前問の正解: <span id="preNumver">0</span></div>
+    <div>前問の正解: <span id="preNumber">0</span></div>
     
 </div>
 
@@ -130,7 +130,7 @@ document.getElementById("submitGuess").addEventListener("click", () => {
     score -= diff;
     if (score < 0) score = 0;
     round++;
-    preAnser = guessValue;
+    preAnswer = guessValue;
     preNumber = currentNumber;
     document.getElementById("round").textContent = round;
     document.getElementById("score").textContent = score;
