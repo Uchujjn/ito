@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ito</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h1>~Ito~</h1>
+    <h2>初めに"設定"からプレイヤー設定をしてください</h2>
+    <h2>"START"を押してゲームスタート！！</h2>
+    <button id="gameStart">START</button><br>
+    <button id="gameSetting">設定</button>
+
+<script>
+    //お題選択へ遷移
+    document.getElementById("gameStart").addEventListener("click", () => {
+        const players = JSON.parse(localStorage.getItem("players") || "[]");
+        if(players.length > 1){
+            location.href = "topic_select.html";
+        }else{
+            alert("プレイヤー設定をしてください（最低２名）");
+        };
+    });
+
+    //設定画面へ遷移
+    document.getElementById("gameSetting").addEventListener("click", () => {
+        location.href = "setting.html";
+    });
+</script>
+</body>
+</html>

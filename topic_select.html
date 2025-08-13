@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>topic_select</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>お題選択</h1>
+    <h2>お題を選んでください</h2>
+    <div class="card" id="topic">　</div>
+    <button id="changeTopic">変更</button><br>
+    <button id="decideTopic">決定</button>
+
+<script>
+    let topics = [];
+    let randomTopic;
+
+    //topics.jsonからお題を読み出し、topicsに格納、初期お題を表示
+    fetch("topics.json")
+    .then(res => res.json())
+    .then(data => {
+        topics = data;
+        setNewTopic();
+    });
+
+    //お題を更新
+    function setNewTopic() {
+        randomTopic = topics[Math.floor(Math.random() * topics.length)];
+        document.getElementById("topic").textContent = randomTopic;
+    };
+
+    //お題を変更
+    document.getElementById("changeTopic").addEventListener("click", () => {
+        setNewTopic();
+    });
+
+    //お題決定、画面遷移
+    document.getElementById("decideTopic").addEventListener("click", () => {
+        localStorage.setItem("topic", randomTopic);
+        location.href = "assign_number.html";
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setting</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>プレイヤー設定</h1>
+    <div>
+        <input type="text" id="inputPlayer" placeholder="プレイヤー名を入力してください">
+        <button id="addPlayer">追加</button>
+    </div>
+
+    <div class="box">
+        <span class="boxTitle">プレイヤーリスト</span>
+        <div id="playerList">　</div>
+    </div>
+
+    <button id="completeSetting">OK</button>
+
+
+<script>
+
+    let players = JSON.parse(localStorage.getItem("players") || "[]"); //ローカルストレージにあれば読み込み、無ければ空配列
+    renderPlayers();
+
+    function renderPlayers(){
+        const container = document.getElementById("playerList");
+        container.innerHTML = "";
+
+        players.forEach((name, index) => {
+            //プレイヤー名要素追加
+            const playerDiv = document.createElement("div");
+            playerDiv.classList.add("playerName");
+            playerDiv.textContent = name;
+
+            //削除ボタン追加
+            const delButton = document.createElement("button");
+            delButton.textContent = "×";
+            delButton.classList.add("deletePlayerButton");
+            delButton.addEventListener("click", () => {
+                players.splice(index, 1);
+                renderPlayers();
+            });
+
+            playerDiv.appendChild(delButton);
+            container.appendChild(playerDiv);
+        });
+    }
+
+    //プレイヤー名入力
+    document.getElementById("addPlayer").addEventListener("click", () => {
+        const inputValue = document.getElementById("inputPlayer").value;
+        if(inputValue.trim() !== ""){
+            players.push(inputValue);
+            document.getElementById("inputPlayer").value = "";
+            renderPlayers();
+        }else{
+            alert("プレイヤー名を入力してください")
+        };
+    });
+
+    function savePlayers(){
+        localStorage.setItem("players", JSON.stringify(players));
+    };
+
+    //トップ画面へ遷移
+    document.getElementById("completeSetting").addEventListener("click", () => {
+        savePlayers();
+        location.href = "index.html";
+    });
+
+</script>
+</body>
+</html>

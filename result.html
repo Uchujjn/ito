@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>結果発表</h1>
+    <div class="card" id="topic">お題</div>
+
+    <div class="box" id="resultList">
+        あああ
+    </div>
+
+    <button id="returnTop">トップへ</button>
+
+<script>
+    const topic = localStorage.getItem("topic");
+    const players = JSON.parse(localStorage.getItem("players"));
+    const numbers = JSON.parse(localStorage.getItem("numbers"));
+    let resultList = "";
+
+    let index = 0;
+    while(index < players.length){
+        resultList = resultList + players[index] + "：" + numbers[index] + "\n";
+        index++;
+    }
+    console.log(resultList);
+    document.getElementById("topic").textContent = topic;
+    document.getElementById("resultList").textContent = resultList;
+    document.getElementById("returnTop").addEventListener("click", () => {
+        location.href = "index.html";
+    })
+
+</script>
+
+</body>
+</html>

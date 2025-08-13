@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="card" id="topic">お題</div>
+    <h2>自分の数字をお題に沿った言葉で表し、全員の数字を予想しよう</h2>
+    <h1>議論時間</h1>
+    <h1 id="timer">3:00</h1>
+    <button id="finishDiscussion">結果発表へ</button>
+
+<script>
+    const topic = localStorage.getItem("topic");
+
+    document.getElementById("topic").textContent = "お題：" + topic;
+
+    document.getElementById("finishDiscussion").addEventListener("click" , () => {
+        location.href = "result.html";
+    });
+
+
+</script>
+</body>
+</html>
