@@ -13,16 +13,48 @@
     <h1 id="timer">3:00</h1>
     <button id="finishDiscussion">結果発表へ</button>
 
+
 <script>
     const topic = localStorage.getItem("topic");
 
     document.getElementById("topic").textContent = "お題：" + topic;
 
-    document.getElementById("finishDiscussion").addEventListener("click" , () => {
+    // タイマーの設定
+    let timeLeft = 180; // 3分 = 180秒
+
+    const timer = document.getElementById("timer");
+
+    // タイマー表示を更新する関数
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        timer.textContent =
+            minutes + ":" + String(seconds).padStart(2, "0");
+    }
+
+    // カウントダウン開始
+    const countdown = setInterval(() => {
+        timeLeft--;
+
+        updateTimer();
+
+        // 0秒になったら停止
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            timer.textContent = "時間終了！";
+        }
+    }, 1000);
+
+    // 結果発表ボタン
+    document.getElementById("finishDiscussion").addEventListener("click", () => {
+        clearInterval(countdown);
         location.href = "result.html";
     });
 
-
+    // 最初の表示
+    updateTimer();
 </script>
+
 </body>
 </html>
